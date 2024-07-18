@@ -1,0 +1,19 @@
+[
+    {
+      "name": "Barbell Bench Press",
+      "muscleGroup": "chest",
+      "difficulty": "intermediate",
+      "equipment": "barbell, bench",
+      "instructions": "Lie on a bench with your feet flat on the floor. Grasp the barbell...",
+      "goals": ["strength", "muscle"]
+    },
+    {
+      "name": "Dumbbell Row",
+      "muscleGroup": "back",
+      "difficulty": "intermediate",
+      "equipment": "dumbbells",
+      "instructions": "Hinge at your hips and grasp a dumbbell in each hand...",
+      "goals": ["strength", "endurance"]
+    }
+  ]
+  

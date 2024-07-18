@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Workout Routine Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Workout Routine Generator</h1>
+
+        <form id="workout-form">
+            <label for="fitnessLevel">Fitness Level:</label>
+            <select id="fitnessLevel" name="fitnessLevel">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate" selected>Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+
+            <fieldset>
+                <legend>Goals:</legend>
+                <input type="checkbox" id="strength" name="goals" value="strength">
+                <label for="strength">Strength</label><br>
+                <input type="checkbox" id="muscleBuilding" name="goals" value="muscleBuilding">
+                <label for="muscleBuilding">Muscle Building</label><br>
+                <input type="checkbox" id="endurance" name="goals" value="endurance">
+                <label for="endurance">Endurance</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Equipment:</legend>
+                <input type="checkbox" id="barbell" name="equipment" value="barbell">
+                <label for="barbell">Barbell</label><br>
+                <input type="checkbox" id="dumbbells" name="equipment" value="dumbbells">
+                <label for="dumbbells">Dumbbells</label><br>
+                <input type="checkbox" id="bodyweight" name="equipment" value="bodyweight">
+                <label for="bodyweight">Bodyweight</label>
+            </fieldset>
+
+            <button type="submit">Generate Routine</button>
+        </form>
+
+        <div id="workout-display">
+            <h2>Your Workout Routine:</h2>
+            <ul id="exercises-list"></ul> 
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const workoutForm = document.getElementById('workout-form');
+            const exercisesList = document.getElementById('exercises-list');
+        
+            workoutForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission behavior
+        
+                // Fetch form values
+                const fitnessLevel = document.getElementById('fitnessLevel').value;
+                const goals = Array.from(document.querySelectorAll('input[name="goals"]:checked')).map(el => el.value);
+                const equipment = Array.from(document.querySelectorAll('input[name="equipment"]:checked')).map(el => el.value);
+        
+                // Fetch exercises data from JSON file
+                fetch('exercises.json')
+                    .then(response => response.json())
+                    .then(exercises => {
+                        // Filter exercises based on user selections
+                        const routine = generateWorkoutRoutine(exercises, fitnessLevel, goals, equipment);
+        
+                        // Display the generated routine
+                        displayRoutine(routine);
+                    });
+            });
+        
+            function generateWorkoutRoutine(exercises, fitnessLevel, goals, equipment) {
+                console.log('Generating routine...', {exercises, fitnessLevel, goals, equipment});
+                return exercises.filter(exercise => {
+                    const meetsFitnessLevel = exercise.fitnessLevel === fitnessLevel;
+                    const meetsGoals = goals.some(goal => exercise.goals.includes(goal));
+                    const hasEquipment = equipment.some(eq => exercise.equipment.includes(eq));
+                    return meetsFitnessLevel && meetsGoals && hasEquipment;
+                }).map(exercise => exercise.name);
+            }
+            
+            function displayRoutine(routine) {
+                console.log('Displaying routine:', routine);
+                exercisesList.innerHTML = ''; // Clear existing list
+                routine.forEach(exercise => {
+                    const li = document.createElement('li');
+                    li.textContent = exercise;
+                    exercisesList.appendChild(li);
+                });
+            }
+        });
+        </script>
+
+</body>
+</html>

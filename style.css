@@ -1,0 +1,86 @@
+/* General Styles */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  #container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Styles */
+  #workout-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #workout-form label {
+    margin-bottom: 5px;
+  }
+  
+  #workout-form select,
+  #workout-form input[type="checkbox"] {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  
+  #workout-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #workout-form button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Workout Display Styles */
+  #workout-display {
+    margin-top: 20px;
+  }
+  
+  #workout-display h2 {
+    margin-bottom: 10px;
+  }
+  
+  #workout-display ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #workout-display li {
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    #container {
+      padding: 10px;
+    }
+  
+    #workout-form select,
+    #workout-form input[type="checkbox"] {
+      width: 100%;
+    }
+  
+    #workout-display li {
+      font-size: 14px;
+    }
+  }
+  
